@@ -71,7 +71,7 @@ app.get("/users/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const user = await User.findOne({ _id: id });
-    
+
     res.status(201).json({
       data: user,
     });
@@ -93,5 +93,48 @@ app.get("/users", async (req, res) => {
     res.status(400).json({
       message: "failed to fetch user",
     });
+  }
+});
+
+app.put("/users/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const allowedUpdates = ["name", "age"];
+    const user = await User.findOne({ _id: id });
+    const newData = req.body;
+    for (const key of Object.keys(newData)) {
+      if (!allowedUpdates.includes(key)) {
+        throw new Error("Invalid update field: " + key);
+      }
+      user[key] = newData[key];
+    }
+    await user.save();
+    res.json({
+      message: "updated successfully",
+      data: user,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+});
+
+app.delete("/users/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const user = await User.findByIdAndDelete(id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({
+      message: "Deleted successfully",
+      deletedUser: user,
+    });
+  } catch (error) {
+    res.status(400).send(error.message);
   }
 });
