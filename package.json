@@ -1,10 +1,10 @@
 {
   "name": "backend-assignments",
   "version": "1.0.0",
-  "description": "",
+  "description": "��#\u0000 \u0000b\u0000a\u0000c\u0000k\u0000e\u0000n\u0000d\u0000-\u0000d\u0000b\u0000-\u0000p\u0000r\u0000a\u0000c\u0000t\u0000i\u0000s\u0000e\u0000-\u00002\u00000\u00002\u00005\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1", 
     "start": "nodemon one/main.js"
   },
   "keywords": [],
@@ -12,9 +12,21 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.5",
     "nodemon": "^3.1.10"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayantkushwah24/backend-db-practise-2025.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jayantkushwah24/backend-db-practise-2025/issues"
+  },
+  "homepage": "https://github.com/jayantkushwah24/backend-db-practise-2025#readme"
 }

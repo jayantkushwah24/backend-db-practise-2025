@@ -3,6 +3,8 @@ import express from "express";
 import { consoleLog } from "./middleware.js";
 import { dbConnect } from "./dbConnect.js";
 import User from "./User.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const app = express();
 const PORT = 3000;
@@ -59,11 +61,25 @@ connectDb();
 // 10.
 app.post("/users", async (req, res) => {
   try {
-    const user = new User(req.body);
+    const { name, email, password, age } = req.body;
+    const saltRounds = 10;
+
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    const user = new User({
+      name,
+      email,
+      age,
+      password: hashedPassword,
+    });
+
     await user.save();
-    res.status(201).send("user created successfully");
+
+    res.status(201).json({
+      message: "user registration successfull",
+    });
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error.message);
   }
 });
 
@@ -136,5 +152,35 @@ app.delete("/users/:id", async (req, res) => {
     });
   } catch (error) {
     res.status(400).send(error.message);
+  }
+});
+
+// 12.
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      throw new Error("User does not exist");
+    }
+
+    const isPasswordMatched = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatched) {
+      throw new Error("invalid password");
+    }
+
+    const token = jwt.sign({ _id: user._id }, "jayu1234", {
+      expiresIn: "1d",
+    });
+
+    res.status(201).json({
+      message: "Login successfull",
+      token,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
   }
 });
