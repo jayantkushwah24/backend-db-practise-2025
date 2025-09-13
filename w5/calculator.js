@@ -6,7 +6,7 @@ app.get("/add/:firstNum/:secondNum", (req, res) => {
   const a = parseInt(req.params.firstNum);
   const b = parseInt(req.params.secondNum);
   res.json({
-    answer: a + b,
+    answer: a + b ,
   });
 });
 app.get("/subtract/:firstNum/:secondNum", (req, res) => {
