@@ -2,10 +2,11 @@
   "name": "backend-assignments",
   "version": "1.0.0",
   "description": "��#\u0000 \u0000b\u0000a\u0000c\u0000k\u0000e\u0000n\u0000d\u0000-\u0000d\u0000b\u0000-\u0000p\u0000r\u0000a\u0000c\u0000t\u0000i\u0000s\u0000e\u0000-\u00002\u00000\u00002\u00005\u0000\r\u0000 \u0000",
-  "main": "index.js",
+  "main": "courseSellingBackend/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon one/main.js"
+    "dev": "nodemon courseSellingBackend/index.js",
+    "start" : "node courseSellingBackend/index.js"
   },
   "keywords": [],
   "author": "",
