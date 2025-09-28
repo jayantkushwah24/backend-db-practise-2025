@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const ObjectId = mongoose.Types.ObjectId;
 
-const userSchema = Schema({
+const userSchema = new Schema({
   firstName: String,
   lastName: String,
   email: {
@@ -12,7 +12,7 @@ const userSchema = Schema({
   password: String,
 });
 
-const adminSchema = Schema({
+const adminSchema = new Schema({
   firstName: String,
   lastName: String,
   email: {
@@ -22,7 +22,7 @@ const adminSchema = Schema({
   password: String,
 });
 
-const courseSchema = Schema({
+const courseSchema = new Schema({
   description: String,
   price: Number,
   imageUrl: String,
@@ -30,7 +30,7 @@ const courseSchema = Schema({
   creatorId: ObjectId,
 });
 
-const purchaseSchema = Schema({
+const purchaseSchema = new Schema({
   userId: ObjectId,
   courseId: ObjectId,
 });
